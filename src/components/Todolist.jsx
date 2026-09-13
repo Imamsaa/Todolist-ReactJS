@@ -1,23 +1,25 @@
 import TodolistButton from "./TodolistButton"
 
-function Todolist() {
+function Todolist(props) {
+    props.tasks.sort((a,b) => {
+        return b.id - a.id
+    });
   return (
     <div className="wrapper">
         <ul>
-            <li>
-                <div class='left'><button>✅</button></div>
-                <div className='center'>bbb</div>
-                <div className='right'>
-                    <TodolistButton/>
-                </div>
-            </li>
-            <li>
-                <div class='left'><button>◻️</button></div>
-                <div className='center'>aaa</div>
-                <div className='right'>
-                    <TodolistButton/>
-                </div>
-            </li>
+            {
+                props.tasks.map((item) => {
+                    return(
+                        <li key={item.id}>
+                            <div className='left'><button>✅</button></div>
+                            <div className='center'>{item.task}</div>
+                            <div className='right'>
+                                <TodolistButton/>
+                            </div>
+                        </li>
+                    );
+                })
+            }
         </ul>
         </div>
   )
