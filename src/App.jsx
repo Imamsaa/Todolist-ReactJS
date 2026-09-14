@@ -52,10 +52,14 @@ function App() {
     setTasks(newData);
   }
 
+  function remove(id) {
+    setTasks(tasks.filter((item) => item.id != id));
+  }
+
   return (
     <>
       <Form addTask={addTask} newTask={newTask}/>
-      <Todolist tasks={tasks} move={move} setCompleted={setCompleted}/>
+      <Todolist tasks={tasks} move={move} setCompleted={setCompleted} remove={remove} />
     </>
   )
 }
