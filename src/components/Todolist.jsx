@@ -23,7 +23,7 @@ function Todolist(props) {
                             <div className='left'><button onClick={() => props.setCompleted(item.id)}>{statusCompleted}</button></div>
                             <div className={statusStrike}>{item.task}</div>
                             <div className='right'>
-                                <TodolistButton/>
+                                <TodolistButton tasks={props.tasks} id={item.id}/>
                             </div>
                         </li>
                     );
