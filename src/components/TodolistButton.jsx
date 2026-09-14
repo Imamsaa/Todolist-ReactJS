@@ -11,11 +11,10 @@ function TodolistButton(props) {
   let prevButton = (props.tasks[prevIndex] != undefined) ? "👆" : "";
   let nextButton = (props.tasks[nextIndex] != undefined) ? "👇" : "";
 
-  console.log(nextIndex);
   return (
     <>
-        <span><button>{prevButton}</button></span>
-        <span><button>{nextButton}</button></span>
+        <span><button onClick={() => props.move(currentIndex, prevIndex)}>{prevButton}</button></span>
+        <span><button onClick={() => props.move(currentIndex, nextIndex)}>{nextButton}</button></span>
         <span><button>🗑️</button></span>
     </>
   );

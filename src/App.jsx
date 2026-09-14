@@ -40,10 +40,22 @@ function App() {
     setTasks(taskItem)
   }
 
+  function move(currentIndex, updateIndex){
+    const currentData = tasks[currentIndex];
+    const updateData = tasks[updateIndex];
+
+    const newData = [...tasks];
+
+    newData[currentIndex] = {...currentData, id:updateData.id};
+    newData[updateIndex] = {...updateData, id:currentData.id};
+
+    setTasks(newData);
+  }
+
   return (
     <>
       <Form addTask={addTask} newTask={newTask}/>
-      <Todolist tasks={tasks} setCompleted={setCompleted}/>
+      <Todolist tasks={tasks} move={move} setCompleted={setCompleted}/>
     </>
   )
 }
