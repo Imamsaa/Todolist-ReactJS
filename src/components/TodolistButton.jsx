@@ -1,8 +1,8 @@
 function TodolistButton(props) {
   let id = props.id;
-  let currentIndex = props.tasks.findIndex((item, index) => {
+  let currentIndex = props.tasks.findIndex((item) => {
     if(item.id == id){
-      return index;
+      return true;
     }
   })
   let prevIndex = currentIndex - 1;
@@ -10,6 +10,8 @@ function TodolistButton(props) {
 
   let prevButton = (props.tasks[prevIndex] != undefined) ? "👆" : "";
   let nextButton = (props.tasks[nextIndex] != undefined) ? "👇" : "";
+
+  console.log(nextIndex);
   return (
     <>
         <span><button>{prevButton}</button></span>
