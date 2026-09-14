@@ -7,9 +7,13 @@ function App() {
   const newTask = useRef('');
   const STORAGE = "TODOLIST_APP";
   const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem(STORAGE)) || []);
+
+  const tasksCompleted = tasks.filter((item) => item.completed === true).length;
+
   useEffect(() => {
     localStorage.setItem(STORAGE, JSON.stringify(tasks));
   },[tasks]);
+
   function addTask(event) {
     event.preventDefault();
     if(!newTask.current.value){
@@ -67,7 +71,7 @@ function App() {
 
   return (
     <>
-      <Form addTask={addTask} newTask={newTask}/>
+      <Form addTask={addTask} newTask={newTask} tasksCompleted={tasksCompleted} tasks={tasks}/>
       <Todolist tasks={tasks} move={move} setCompleted={setCompleted} remove={remove} />
     </>
   )
