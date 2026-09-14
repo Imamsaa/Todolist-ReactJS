@@ -1,11 +1,15 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css"
 import Form from "./components/Form"
 import Todolist from "./components/Todolist"
 
 function App() {
   const newTask = useRef('');
-  const [tasks, setTasks] = useState([]);
+  const STORAGE = "TODOLIST_APP";
+  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem(STORAGE)) || []);
+  useEffect(() => {
+    localStorage.setItem(STORAGE, JSON.stringify(tasks));
+  },[tasks]);
   function addTask(event) {
     event.preventDefault();
     if(!newTask.current.value){
@@ -14,8 +18,11 @@ function App() {
     }
 
     const setId = () => {
-      const jumlah = tasks.length;
-      return jumlah + 1;
+      if(tasks[0] == undefined){
+        return 1;
+      }else{
+        return tasks[0].id + 1;
+      }
     }
 
     const data = {
@@ -53,7 +60,9 @@ function App() {
   }
 
   function remove(id) {
-    setTasks(tasks.filter((item) => item.id != id));
+    if(window.confirm("Apakah anda yakin?")){
+      setTasks(tasks.filter((item) => item.id != id));
+    }
   }
 
   return (
